@@ -25,6 +25,8 @@ Route::middleware('auth')->name('dashboard.')->prefix('/dashboard')->group(funct
     //*PROFILE
     Route::get('/profile-update', [ProfileController::class, 'index'])->name('profile.index');
     Route::post('/profile-update', [ProfileController::class, 'store'])->name('profile.store');
+    Route::post('/password-update', [ProfileController::class, 'passwordUpdate'])->name('password.update');
+    Route::post('/image-update', [ProfileController::class, 'imageUpdate'])->name('image.update');
 
 
 });

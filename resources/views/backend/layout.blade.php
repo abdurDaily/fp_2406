@@ -28,8 +28,11 @@
 
     <!-- Core CSS -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/css/core.css') }}" class="template-customizer-core-css">
-    <link rel="stylesheet" href="{{ asset('assets/vendor/css/theme-default.css') }}" class="template-customizer-theme-css">
+    <link rel="stylesheet" href="{{ asset('assets/vendor/css/theme-default.css') }}"
+        class="template-customizer-theme-css">
     <link rel="stylesheet" href="{{ asset('assets/css/demo.css') }}">
+
+    @stack('backend_css')
 
     <!-- Vendors CSS -->
     <link rel="stylesheet" href="{{ asset('assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}">
@@ -904,9 +907,7 @@
                                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);"
                                     data-bs-toggle="dropdown">
                                     <div class="avatar avatar-online">
-                                        <img src="https://api.dicebear.com/9.x/initials/svg?seed={{ Auth::user()->name
-                                         }}" alt=""
-                                            class="w-px-40 h-auto rounded-circle">
+                                        <img src="{{ Auth::user()->image ? env('APP_URL') . '/storage/profile/' . Auth::user()->image: 'https://api.dicebear.com/9.x/initials/svg?seed=' . Auth::user()->name  }} " alt="" class="w-px-40 h-auto rounded-circle">
                                     </div>
                                 </a>
                                 <ul class="dropdown-menu dropdown-menu-end">
@@ -916,8 +917,7 @@
                                                 <div class="flex-shrink-0 me-3">
                                                     <div class="avatar avatar-online">
                                                         <img src="https://api.dicebear.com/9.x/initials/svg?seed={{ Auth::user()->name
-                                         }}" alt=""
-                                                            class="w-px-40 h-auto rounded-circle">
+                                         }}" alt="" class="w-px-40 h-auto rounded-circle">
                                                     </div>
                                                 </div>
                                                 <div class="flex-grow-1">
@@ -936,16 +936,25 @@
                                             <span class="align-middle">My Profile</span>
                                         </a>
                                     </li>
-                                   
-                                   
+
+
                                     <li>
                                         <div class="dropdown-divider"></div>
                                     </li>
                                     <li>
-                                        <a class="dropdown-item" href="auth-login-basic.html">
-                                            <i class="bx bx-power-off me-2"></i>
-                                            <span class="align-middle">Log Out</span>
-                                        </a>
+
+                                        <form method="POST" action="{{ route('logout') }}">
+                                            @csrf
+
+
+
+
+                                            <button type="submit" class="dropdown-item">
+                                                <i class="bx bx-power-off me-2"></i>
+                                                {{ __('Log Out') }}
+                                            </button>
+
+                                        </form>
                                     </li>
                                 </ul>
                             </li>
@@ -961,13 +970,13 @@
                     <!-- Content -->
 
                     <div class="container-xxl flex-grow-1 container-p-y">
-                      <div class="card">
-                        @yield('backend_content')
-                      </div>
+                        <div class="card">
+                            @yield('backend_content')
+                        </div>
                     </div>
                     <!-- / Content -->
 
-                  
+
 
                     <div class="content-backdrop fade"></div>
                 </div>
@@ -981,7 +990,7 @@
     </div>
     <!-- / Layout wrapper -->
 
-    
+
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
@@ -1001,6 +1010,9 @@
 
     <!-- Page JS -->
     <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>
+
+    @stack('backend_js')
+
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async="" defer="" src="https://buttons.github.io/buttons.js"></script>
