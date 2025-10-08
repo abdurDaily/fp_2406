@@ -1,6 +1,6 @@
 <?php
 
-
+use App\Http\Controllers\Backend\Category\CategoryController;
 use App\Http\Controllers\Backend\Profile\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -20,7 +20,7 @@ Route::middleware('auth')->group(function () {
 
 
 //* BACKEND 
-Route::middleware('auth')->name('dashboard.')->prefix('/dashboard')->group(function(){
+Route::middleware('auth')->name('dashboard.')->prefix('/dashboard')->group(function () {
 
     //*PROFILE
     Route::get('/profile-update', [ProfileController::class, 'index'])->name('profile.index');
@@ -29,9 +29,15 @@ Route::middleware('auth')->name('dashboard.')->prefix('/dashboard')->group(funct
     Route::post('/image-update', [ProfileController::class, 'imageUpdate'])->name('image.update');
 
 
+    //*CATEGORY
+    Route::get('/category-index', [CategoryController::class, 'categoryIndex'])->name('category.index');
+    Route::post('/category-index', [CategoryController::class, 'categoryStore'])->name('category.store');
 });
+
+
+
 
 
 // * FRONTEND 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

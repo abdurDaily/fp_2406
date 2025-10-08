@@ -54,6 +54,7 @@
         }
     </style>
 
+      @stack('backend_css')
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
     <!--? Config:  Mandatory theme config file contain global vars & default theme options, Set your preferred theme option in this file.  -->
     <script src="{{ asset('assets/js/config.js') }}"></script>
@@ -820,10 +821,16 @@
 
                 <ul class="menu-inner py-1 ps ps--active-y">
                     <!-- Dashboard -->
-                    <li class="menu-item active">
-                        <a href="index.html" class="menu-link">
+                    <li class="menu-item ">
+                        <a href="#" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Analytics">Dashboard</div>
+                        </a>
+                    </li>
+                    <li class="menu-item {{ Route::is('dashboard.category.index') ? 'active': '' }}">
+                        <a href="{{ route('dashboard.category.index') }}" class="menu-link">
+                            <i class="menu-icon tf-icons bx bx-home-circle"></i>
+                            <div data-i18n="Analytics">Category</div>
                         </a>
                     </li>
 
@@ -972,6 +979,8 @@
                     <div class="container-xxl flex-grow-1 container-p-y">
                         <div class="card">
                             @yield('backend_content')
+
+
                         </div>
                     </div>
                     <!-- / Content -->
@@ -1017,6 +1026,7 @@
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async="" defer="" src="https://buttons.github.io/buttons.js"></script>
 
+    @stack('backend_js')
 
     <svg id="SvgjsSvg1283" width="2" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1"
         xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev"
