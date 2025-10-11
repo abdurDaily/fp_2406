@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('title');
             $table->string('image')->nullable();
             $table->boolean('status')->default(1);
-            $table->text('meta-title')->nullable();
-            $table->text('meta-description')->nullable();
+            $table->text('meta_title')->nullable();
+            $table->text('meta_description')->nullable();
             $table->foreignId('parent_id')->nullable()->constrained('categoties')->onDelete('cascade');
             $table->timestamps();
         });

@@ -32,6 +32,10 @@ Route::middleware('auth')->name('dashboard.')->prefix('/dashboard')->group(funct
     //*CATEGORY
     Route::get('/category-index', [CategoryController::class, 'categoryIndex'])->name('category.index');
     Route::post('/category-index', [CategoryController::class, 'categoryStore'])->name('category.store');
+    Route::get('/category-show', [CategoryController::class, 'categoryShow'])->name('category.show');
+    Route::get('/category-edit/{id}', [CategoryController::class, 'categoryEdit'])->name('category.edit');
+    Route::put('/category-update/{id}', [CategoryController::class, 'categoryUpdate'])->name('category.update');
+    Route::get('/category-delete/{id}', [CategoryController::class, 'categoryDelete'])->name('category.delete');
 });
 
 

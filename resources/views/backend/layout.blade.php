@@ -827,7 +827,7 @@
                             <div data-i18n="Analytics">Dashboard</div>
                         </a>
                     </li>
-                    <li class="menu-item {{ Route::is('dashboard.category.index') ? 'active': '' }}">
+                    <li class="menu-item {{ Route::is('dashboard.category.index') || Route::is('dashboard.category.show') ? 'active': '' }}">
                         <a href="{{ route('dashboard.category.index') }}" class="menu-link">
                             <i class="menu-icon tf-icons bx bx-home-circle"></i>
                             <div data-i18n="Analytics">Category</div>
