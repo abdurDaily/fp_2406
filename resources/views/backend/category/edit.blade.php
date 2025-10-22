@@ -56,7 +56,7 @@
                     <select class="js-example-basic-single form-control" name="state">
                         
                         @foreach ($allCategory as $category)
-                        <option {{ $category->id == $edit_category->id ? 'selected' : ''}} value="{{ $category->id }}">{{ $category->title }}</option>
+                        <option {{ $category->id == $edit_category->parent_id ? 'selected' : ''}} value="{{ $category->id }}">{{ $category->title }}</option>
                         @endforeach
                     </select>
 

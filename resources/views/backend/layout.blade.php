@@ -835,38 +835,34 @@
                     </li>
 
                     <!-- Layouts -->
-                    <li class="menu-item">
+                    <li class="menu-item {{Route::is('dashboard.product.image.show') || Route::is('dashboard.product.image') || Route::is('dashboard.product.index') || Route::is('dashboard.product.show') ? 'active open' : '' }}">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-layout"></i>
-                            <div data-i18n="Layouts">Layouts</div>
+                            <div data-i18n="Layouts">Product</div>
                         </a>
 
                         <ul class="menu-sub">
-                            <li class="menu-item">
-                                <a href="layouts-without-menu.html" class="menu-link">
-                                    <div data-i18n="Without menu">Without menu</div>
+                            <li class="menu-item {{ Route::is('dashboard.product.index') ? 'active' : ''  }}">
+                                <a href="{{ route('dashboard.product.index') }}" class="menu-link ">
+                                    <div data-i18n="Without menu">Add Product +</div>
                                 </a>
                             </li>
-                            <li class="menu-item">
-                                <a href="layouts-without-navbar.html" class="menu-link">
-                                    <div data-i18n="Without navbar">Without navbar</div>
+                            <li class="menu-item {{ Route::is('dashboard.product.show') ? 'active' : ''}}">
+                                <a href="{{ route('dashboard.product.show') }}" class="menu-link ">
+                                    <div data-i18n="Without menu">Show Products</div>
                                 </a>
                             </li>
-                            <li class="menu-item">
-                                <a href="layouts-container.html" class="menu-link">
-                                    <div data-i18n="Container">Container</div>
+                            <li class="menu-item {{ Route::is('dashboard.product.image') ? 'active' : ''}}">
+                                <a href="{{ route('dashboard.product.image') }}" class="menu-link ">
+                                    <div data-i18n="Without menu">Upload Images</div>
                                 </a>
                             </li>
-                            <li class="menu-item">
-                                <a href="layouts-fluid.html" class="menu-link">
-                                    <div data-i18n="Fluid">Fluid</div>
+                            <li class="menu-item {{ Route::is('dashboard.product.image.show') ? 'active' : ''}}">
+                                <a href="{{ route('dashboard.product.image.show') }}" class="menu-link ">
+                                    <div data-i18n="Without menu">Show Images</div>
                                 </a>
                             </li>
-                            <li class="menu-item">
-                                <a href="layouts-blank.html" class="menu-link">
-                                    <div data-i18n="Blank">Blank</div>
-                                </a>
-                            </li>
+                            
                         </ul>
                     </li>
 
@@ -1020,7 +1016,7 @@
     <!-- Page JS -->
     <script src="{{ asset('assets/js/dashboards-analytics.js') }}"></script>
 
-    @stack('backend_js')
+ 
 
 
     <!-- Place this tag in your head or just before your close body tag. -->
@@ -1028,15 +1024,7 @@
 
     @stack('backend_js')
 
-    <svg id="SvgjsSvg1283" width="2" height="0" xmlns="http://www.w3.org/2000/svg" version="1.1"
-        xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev"
-        style="overflow: hidden; top: -100%; left: -100%; position: absolute; opacity: 0;">
-        <defs id="SvgjsDefs1284"></defs>
-        <polyline id="SvgjsPolyline1285" points="0,0"></polyline>
-        <path id="SvgjsPath1286"
-            d="M-1 217.1625L-1 217.1625C-1 217.1625 55.662144252232146 217.1625 55.662144252232146 217.1625C55.662144252232146 217.1625 111.32428850446429 217.1625 111.32428850446429 217.1625C111.32428850446429 217.1625 166.98643275669644 217.1625 166.98643275669644 217.1625C166.98643275669644 217.1625 222.64857700892858 217.1625 222.64857700892858 217.1625C222.64857700892858 217.1625 278.3107212611607 217.1625 278.3107212611607 217.1625C278.3107212611607 217.1625 333.9728655133929 217.1625 333.9728655133929 217.1625C333.9728655133929 217.1625 389.63500976562506 217.1625 389.63500976562506 217.1625C389.63500976562506 217.1625 389.63500976562506 217.1625 389.63500976562506 217.1625 ">
-        </path>
-    </svg>
+   
 </body>
 
 </html>
