@@ -3,6 +3,7 @@
 use App\Http\Controllers\Backend\Category\CategoryController;
 use App\Http\Controllers\Backend\Product\ProductController;
 use App\Http\Controllers\Backend\Profile\ProfileController;
+use App\Http\Controllers\Frontend\FrontendController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -50,14 +51,17 @@ Route::middleware('auth')->name('dashboard.')->prefix('/dashboard')->group(funct
     Route::get('/product-image', [ProductController::class, 'productImage'])->name('product.image');
     Route::post('/product-image', [ProductController::class, 'productImagesStore'])->name('product.image.store');
     Route::get('/product-image-show', [ProductController::class, 'productImageShow'])->name('product.image.show');
+    Route::get('/product-image-edit/{id}', [ProductController::class, 'productImageEdit'])->name('product.image.edit');
+    Route::get('/product-image-delete/{id}', [ProductController::class, 'productImageDelete'])->name('product.image.delete');
+    Route::put('/product-image-update/{id}', [ProductController::class, 'productImageUpdate'])->name('product.image.update');
 });
 
 
 
-
-
-
-
 // * FRONTEND 
+
+Route::name('frontend.')->group(function(){
+   Route::get('/', [FrontendController::class,'index'])->name('index');
+});
 
 require __DIR__ . '/auth.php';

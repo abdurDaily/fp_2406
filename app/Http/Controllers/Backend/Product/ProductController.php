@@ -115,4 +115,37 @@ class ProductController extends Controller
         // dd($images);
         return view('backend.product.imageShow', compact('images'));
     }
+
+    //* EDIT 
+    public function productImageEdit($id){
+        $products = Product::select('id', 'title')->get();
+        $findImages = Product::with('images')->find($id);
+
+        // dd($products,$findImages);
+        return view('backend.product.editImage', compact('products', 'findImages'));
+    }
+
+
+    //* DELETE 
+    public function productImageDelete($id){
+        Image::find($id)->delete();
+        return back();
+    }
+
+    //* UPDATE 
+    public function productImageUpdate(Request $request, $id){
+     
+        
+        if ($request->hasFile('images')) {
+            foreach ($request->file('images') as $image) {
+                $uniName = 'product-' . time() . '.' . $image->getClientOriginalName();
+                $image->storeAs('product/', $uniName, 'public');
+                Image::create([
+                    'image'=> $uniName,
+                    'product_id' => $request->product_id,
+                ]);
+            }
+        }
+        return redirect()->route('dashboard.product.image.show');
+    }
 }

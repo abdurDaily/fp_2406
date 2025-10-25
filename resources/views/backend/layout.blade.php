@@ -835,7 +835,7 @@
                     </li>
 
                     <!-- Layouts -->
-                    <li class="menu-item {{Route::is('dashboard.product.image.show') || Route::is('dashboard.product.image') || Route::is('dashboard.product.index') || Route::is('dashboard.product.show') ? 'active open' : '' }}">
+                    <li class="menu-item {{Route::is('dashboard.product.image.show') || Route::is('dashboard.product.image.edit') || Route::is('dashboard.product.image') || Route::is('dashboard.product.index') || Route::is('dashboard.product.show') ? 'active open' : '' }}">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
                             <i class="menu-icon tf-icons bx bx-layout"></i>
                             <div data-i18n="Layouts">Product</div>
