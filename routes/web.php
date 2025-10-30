@@ -56,6 +56,9 @@ Route::middleware('auth')->name('dashboard.')->prefix('/dashboard')->group(funct
     Route::put('/product-image-update/{id}', [ProductController::class, 'productImageUpdate'])->name('product.image.update');
 });
 
+Route::get('/add-to-cart/{id}', [ProductController::class, 'addToCart'])->name('addto.cart');
+Route::get('/cart-delete/{id}', [ProductController::class, 'cartDelete'])->name('delete.cart');
+Route::get('/checkout-form', [ProductController::class, 'checkoutForm'])->name('checkout.form');
 
 
 // * FRONTEND 

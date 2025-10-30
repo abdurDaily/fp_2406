@@ -463,6 +463,23 @@
         </nav>
     </section>
 
+
+    <div class="row justify-content-end ">
+        <div class="col-4 ">
+            @session('success')
+
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <strong> {{ $value }} </strong>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+
+            @endsession
+        </div>
+    </div>
+
+
+
+
     <!-- =====  nav section end    ===== -->
 
 
@@ -549,6 +566,19 @@
 
     @yield('frontend_content')
 
+     @php
+            $totalQty = 0
+            @endphp
+
+            @foreach (session('cart', []) as $cartQty)
+            
+            @php
+                $totalQty = $totalQty + $cartQty['qty']
+            @endphp
+
+            @endforeach
+         
+          
 
 
 
@@ -556,7 +586,10 @@
         aria-controls="cart_offcanvasRight">
         cart
         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-            0
+
+
+           {{ $totalQty }}
+
             <span class="visually-hidden">unread messages</span>
         </span>
     </button>
@@ -569,22 +602,31 @@
             <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
         <div class="offcanvas-body ">
-            <div class="row">
-                <div class="col-2">
-                    image
+
+            @foreach (session('cart', []) as $key => $cart)
+
+
+
+            <div class="row mb-4">
+                <div class="col-3">
+                    <img class="img-fluid" src="{{  asset('storage/product/' . $cart['image']) }}" alt="">
                 </div>
-                <div class="col-8">
-                    <p>Lorem ipsum dolor sit amet.</p>
+                <div class="col-7">
+                    <p class="mb-0">{{ $cart['title'] }}</p>
+                    <p class="mb-0">Qty: {{ $cart['qty'] }}</p>
+                    <p class="mb-0">Price: {{ $cart['price'] }} * {{ $cart['qty'] }} = {{ $cart['price'] * $cart['qty']
+                        }} tk</p>
                 </div>
-                <div class="col-2">
-                    <a href="">delete</a>
+                <div class="col-2 ">
+                    <a href="{{ route('delete.cart',$key ) }}" class="btn btn-outline-danger btn-sm">delete</a>
                 </div>
             </div>
 
+            @endforeach
 
         </div>
         <div class="text-center">
-            <a href="#" class="btn btn-success   checkout ">Checkout</a>
+            <a href="{{ route('checkout.form') }}" class="btn btn-success   checkout ">Checkout</a>
         </div>
     </div>
 

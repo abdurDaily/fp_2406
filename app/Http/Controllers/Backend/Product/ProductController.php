@@ -99,25 +99,25 @@ class ProductController extends Controller
                 $uniName = 'product-' . time() . '.' . $image->getClientOriginalName();
                 $image->storeAs('product/', $uniName, 'public');
                 Image::create([
-                    'image'=> $uniName,
+                    'image' => $uniName,
                     'product_id' => $request->product_id,
                 ]);
             }
         }
-
-        
     }
 
 
     //* productImageShow
-    public function productImageShow(){
+    public function productImageShow()
+    {
         $images = Product::with('images')->simplePaginate(10);
         // dd($images);
         return view('backend.product.imageShow', compact('images'));
     }
 
     //* EDIT 
-    public function productImageEdit($id){
+    public function productImageEdit($id)
+    {
         $products = Product::select('id', 'title')->get();
         $findImages = Product::with('images')->find($id);
 
@@ -127,25 +127,68 @@ class ProductController extends Controller
 
 
     //* DELETE 
-    public function productImageDelete($id){
+    public function productImageDelete($id)
+    {
         Image::find($id)->delete();
         return back();
     }
 
     //* UPDATE 
-    public function productImageUpdate(Request $request, $id){
-     
-        
+    public function productImageUpdate(Request $request, $id)
+    {
+
+
         if ($request->hasFile('images')) {
             foreach ($request->file('images') as $image) {
                 $uniName = 'product-' . time() . '.' . $image->getClientOriginalName();
                 $image->storeAs('product/', $uniName, 'public');
                 Image::create([
-                    'image'=> $uniName,
+                    'image' => $uniName,
                     'product_id' => $request->product_id,
                 ]);
             }
         }
         return redirect()->route('dashboard.product.image.show');
+    }
+
+
+    //* addToCart
+    public function addToCart($id)
+    {
+        $product = Product::with('images')->find($id);
+        $cart = session('cart', []);
+
+        if (isset($cart[$id])) {
+            $cart[$id]['qty'] += 1;
+            session()->put('cart', $cart);
+        } else {
+
+            $cart[$id] = [
+                'title' => $product->title,
+                'descriptions' => $product->descriptions,
+                'price' => $product->price,
+                'qty' => 1,
+                'image' => $product->images[0]->image ?? '',
+            ];
+        }
+
+
+        session()->put('cart', $cart);
+        return redirect()->back()->with('success', 'new cart added!');
+    }
+
+    public function cartDelete($id)
+    {
+        $cart = session('cart', []);
+        if (isset($cart[$id])) {
+            unset($cart[$id]);
+            session()->put('cart', $cart);
+        }
+        return redirect()->back()->with('success', 'cart deleted!');
+    }
+
+
+    public function checkoutForm(){
+        return view('frontend.checkoutForm');
     }
 }

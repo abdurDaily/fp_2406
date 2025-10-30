@@ -146,11 +146,13 @@
 
             @forelse ($products as $product)
 
+            {{-- @dd($product->images[0]->image) --}}
+
 
 
             <div class="product_child col-xl-3 col-lg-4 col-sm-4  filter cat-1">
                 <div class="img-box">
-                    <img src="{{ asset('storage/product/' . $product->images[0]->image)}}" alt="product4"
+                    <img src="http://127.0.0.1:8000/storage/product/product-1761799484.bannerImg.png" alt="product4"
                         class="img-fluid">
 
                     <div class="preview_icons">
@@ -186,7 +188,10 @@
                     </div>
                     <div class="cart">
                         <span>
-                            <iconify-icon icon="heroicons:shopping-bag" width="24" height="24"></iconify-icon>
+                            <a href="{{ route('addto.cart', $product->id) }}">
+                                <iconify-icon icon="heroicons:shopping-bag" width="24" height="24"></iconify-icon>
+
+                            </a>
                         </span>
                     </div>
                 </div>
